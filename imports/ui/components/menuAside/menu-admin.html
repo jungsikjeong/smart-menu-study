@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu App</title>
+  <link rel="stylesheet" href="../style//bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../style/boxicon/css/boxicons.min.css">
+  <link rel="stylesheet" href="../style/main.css">  
+  <link rel="stylesheet" href="../style/simplebar.css">
+  
+  <script src="../js/simplebar.min.js"></script>
+  <script src="../style/bootstrap/bootstrap.js"></script>
+</head>
+<body>
+  <div class="app d-flex container-fluid">
+    <main><!-- main start -->
+      <div class="content d-flex flex-column container-fluid">
+        <div class="main-header-section d-flex flex-column ">
+          <div class="header-box-top d-flex " >
+            <h1>스마트 메뉴판</h1>
+            <input type="text" class="form-control txt-search-menu border-line" placeholder="원하는 메뉴 이름을 입력해주세요.">
+            <!-- <form  class="">
+              <input type="text" class="form-control txt-search-menu border-line" placeholder="원하는 메뉴 이름을 입력해주세요.">
+              <label for="floatingInputInvalid"><i class='bx bx-plus bx-md' ></i></label>
+            </form> -->
+
+          </div>
+          <div class="header-box-bottom">
+            <ul class="d-flex justify-content-start">
+              <li>
+                <a href="#null" class="d-flex align-items-center" >모두보기</a>
+              </li>
+              <li>
+                <a  href="#null" class="d-flex align-items-center selected">샌드위치</a>
+              </li>            
+              <li>
+                <a href="#null" class="d-flex align-items-center" >피자</a>
+              </li>      
+              <li>
+                <a href="#null" class="d-flex align-items-center" >음료</a>
+              </li>      
+              <li>
+                <a href="#null" class="d-flex align-items-center add" >+관리</a>
+              </li>                                                                                
+            </ul>
+          </div> <!-- header-box-bottom-->
+        </div><!-- main-header-section -->
+        <div class="main-content-section  simplebar">
+          <div class="row row-cols-4 g-4 pl-3 pr-3 pt-2 pb-4">
+            <div class="col mb-2">
+              <a href="#null" class="btn-add-modal-show" >
+                <div class="card menu-add-box h-100 d-flex justify-content-center align-items-center">
+                  <i class='bx bx-plus bx-md' ></i>
+                </div>
+              </a>
+            </div>                        
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                <!-- <img src="../images/food_img/pizza_4.jpg" class="card-img-top" alt=""> -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>  
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                  <!-- <img src="../images/food_img/pizza_4.jpg" class="card-img-top" alt=""> -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                  <!-- <img src="../images/food_img/berger_1.jpg" class="card-img-top" alt=""> -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div> 
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card ct-shadow-sm menu-item-box">
+                <div class="img-box" style="background-image: url('../images/food_img/pasta_1.jpg');" >
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Nomal Pizza</h5>
+                  <p class="card-text">12,000</p>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- end row-->
+        </div> <!-- end main-content-section -->
+      </div>
+    </main><!-- main end -->
+    <aside>
+      <div class="side-header">
+        <div class="title-box d-flex align-items-center justify-content-between pl-4 pr-4 pt-4">
+          <h2>주문내용</h2>
+          <span>
+            <a href="#null" ><i class='bx bx-log-in'></i></a>
+            <a href="#null"><i class='bx bxs-cog'></i></a>
+          </span>
+
+        </div>
+        <div class="info-box d-flex justify-content-end align-items-center pl-4 pr-4">
+          <p>수량 선택</p>
+        </div>
+      </div>
+      <div class="side-content-admin aside-box simplebar mt-auto">
+        <!-- order results start -->
+        <ul>
+          <!-- order one start -->
+          <li class="d-flex  flex-column p-4 order-result-list ">
+            <div class="d-flex justify-content-between ">
+              <ul class="order-inner-list">
+                <li class="d-flex justify-content-between date">
+                  <p>2021-12-10</p>
+                  <p class="btnOrderCheck">확인</p>
+                </li>        
+                <li class="d-flex justify-content-between ">
+                  <p>피자</p>
+                  <p>4개</p>
+                </li>   
+                <li class="d-flex justify-content-between ">
+                  <p>가격(개당: 10000)</p>
+                  <p>4000</p>
+                </li>                   
+                <li class="d-flex justify-content-between total ">
+                  <p>개수합계</p>
+                  <p>4</p>
+                </li>                   
+                <li class="d-flex justify-content-between total ">
+                  <p>가격합계</p>
+                  <p>40000</p>
+                </li>                                 
+              </ul>
+            </div>
+          </li>
+          <!-- order one end -->                                                                                     
+        </ul> 
+        <!-- order results end-->
+      </div>
+
+      <div class="side-bottom-admin d-flex flex-column justify-content-center align-items-center">
+        <!-- <div class="side-bottom-header d-flex align-items-center justify-content-center">
+          <p><span class="total-count">50</span>개 <span class="total-price">232,000</span>원 선택</p>
+        </div>
+        <div class="side-bottom-button-box d-flex flex-column pl-4 pr-4 pb-4 " >
+          <button class="btn btn-primary h-100">
+            결재하기  
+          </button>
+        </div> -->
+      </div>
+
+    </aside><!-- end aside -->    
+
+  </div><!-- end app -->
+
+  <div class="modal add-menu-modal fade " id="add-menu-modal"  >
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">메뉴 추가</h4>
+          <button type="button" class="btn-close" ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">메뉴 이름:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">메뉴 카테고리:</label>
+              <select name="menu-cateogry-select" class="form-select">
+                <option value="id1">Berger</option>
+                <option value="id2">Pizza</option>
+                <option value="id3">Side</option>
+              </select>
+            </div>            
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">메뉴 가격:</label>
+              <input type="text" class="form-control" id="recipient-name">
+              <!-- <textarea class="form-control" id="message-text"></textarea> -->
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">메뉴 이미지:</label>
+              <input type="file" class="form-control" id="recipient-name">
+            </div>
+            
+            <div class="mb-3">
+              <img src="../images/food_img/KjdgrhOok.png" class="card-img-top" alt="">
+            </div>            
+          </form>
+        </div>
+        <div class="modal-footer d-flex flex-column align-items-stretch">
+          <button type="button" class="btn btn-primary pt-3 pb-3">메뉴 추가</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- add-menu-modal -->
+
+  <div class="modal add-cateegory-modal fade" id="add-cateegory-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>카테고리 관리</h4> 
+          <button type="button" class="btn-close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 class="mb-3">카테고리 목록</h5>
+          
+          <ul class="category-list">
+            <li class="mb-3 d-flex justify-content-between">
+              <p>피자</p> 
+              <div class="edit-box">
+                <a href="#" class="link"><i class='bx bxs-pencil'></i></a>
+                <a href="#" class="link"><i class='bx bxs-trash'></i></a>
+              </div>
+            </li>
+            <li class="mb-3">
+              <input type="text" class="form-control border-line" value="버거">
+            </li>
+            <li class="mb-3 d-flex justify-content-between">
+              <p>사이드</p>
+              <div class="edit-box">
+                <a href="#" class="link"><i class='bx bxs-pencil'></i></a>
+                <a href="#" class="link"><i class='bx bxs-trash'></i></a>
+              </div>              
+            </li>                        
+            <li class="mb-3 d-flex justify-content-between">
+              <p>음료</p>
+              <div class="edit-box">
+                <a href="#" class="link"><i class='bx bxs-pencil'></i></a>
+                <a href="#" class="link"><i class='bx bxs-trash'></i></a>
+              </div>              
+            </li>                                    
+          </ul>
+          <!-- <div class="input-group">
+            <input type="text" class="form-control border-line">
+            <button class="btn btn-primary">등록</button>
+          </div> -->
+          
+        </div>
+
+        <div class="modal-footer d-flex flex-column align-items-stretch">
+          <div class="input-group">
+            <input type="text" class="form-control border-line">
+            <button class="btn btn-primary">등록</button>
+          </div>          
+        </div>        
+      </div>
+    </div>
+
+  </div><!-- add-category-modal -->
+</body>
+</html>
