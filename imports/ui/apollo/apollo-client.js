@@ -2,7 +2,6 @@ import {
   ApolloClient,
   InMemoryCache,
   split,
-  HttrpLink,
   ApolloLink,
   from,
   HttpLink,
@@ -21,7 +20,7 @@ const wsLink = new GraphQLWsLink(
   }),
 )
 
-const authLink = new ApolloClient((operation, forward) => {
+const authLink = new ApolloLink((operation, forward) => {
   return forward(operation)
 })
 
