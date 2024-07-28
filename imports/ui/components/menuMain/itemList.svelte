@@ -3,7 +3,12 @@
   import { GET_ITEMS } from '../../apollo/query'
   import ItemLoading from './itemLoading.svelte'
   import Item from './item.svelte'
-  import { itemPage, modalActiveItem, itemPageLock } from '../../stores'
+  import {
+    itemPage,
+    modalActiveItem,
+    itemPageLock,
+    itemFormMode,
+  } from '../../stores'
 
   let component
   let elementScroll
@@ -12,6 +17,7 @@
 
   const onOpenModalItemForm = () => {
     modalActiveItem.openModal()
+    itemFormMode.onAddMode()
   }
 
   const onScroll = (e) => {

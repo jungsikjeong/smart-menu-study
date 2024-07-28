@@ -1,12 +1,25 @@
 <script>
   import Modal from '../common/modal.svelte'
-  import { itemFormValue, modalActiveItem } from '../../stores'
+  import { itemFormValue, itemFormMode, modalActiveItem } from '../../stores'
   import { mutation, query } from 'svelte-apollo'
-  import { ADD_ITEM, GET_CATEGORIES, GET_ITEMS } from '../../apollo/query'
+  import {
+    ADD_ITEM,
+    DELETE_ITEM,
+    GET_CATEGORIES,
+    GET_ITEMS,
+    UPDATE_ITEM,
+  } from '../../apollo/query'
+  import { ADD_MODE, EDIT_MODE } from '../../../utils/constants'
+
+  $: {
+    if ($itemFormMode === ADD_MODE) itemFormValue.resetForm()
+  }
 
   const items = query(GET_ITEMS)
   const categories = query(GET_CATEGORIES)
   const addItem = mutation(ADD_ITEM)
+  const updateItem = mutation(UPDATE_ITEM)
+  const deleteItem = mutation(DELETE_ITEM)
 
   const onAddItem = async () => {
     $itemFormValue.itemPrice = Number($itemFormValue.itemPrice)
@@ -26,6 +39,31 @@
     modalActiveItem.closeModal()
     // errors = {}
     items.refetch()
+  }
+
+  const onUpdateItem = async () => {
+    $itemFormValue.itemPrice = Number($itemFormValue.itemPrice)
+
+    try {
+      await updateItem({ variables: $itemFormValue })
+      clearItemForm()
+    } catch (error) {
+      console.log(`update item error ${error}`)
+    }
+  }
+
+  const onDeleteItem = async () => {
+    if (confirm('선택 메뉴를 삭제하겠습니까?')) {
+      try {
+        await deleteItem({
+          variables: { _id: $itemFormValue._id },
+        })
+
+        clearItemForm()
+      } catch (error) {
+        console.log(`delete item error: ${error}`)
+      }
+    }
   }
 </script>
 
@@ -83,8 +121,29 @@
     class="modal-footer d-flex flex-column align-items-stretch"
     slot="modal-footer"
   >
-    <button type="button" class="btn btn-primary pt-3 pb-3" on:click={onAddItem}
-      >메뉴 추가</button
-    >
+    {#if $itemFormMode === ADD_MODE}
+      <button
+        type="button"
+        class="btn btn-primary pt-3 pb-3"
+        on:click={onAddItem}>메뉴 추가</button
+      >
+    {:else if $itemFormMode === EDIT_MODE}
+      <div class="row item-bottom">
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-primary pt-3 pb-3"
+            on:click={onUpdateItem}>메뉴 수정</button
+          >
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-danger pt-3 pb-3"
+            on:click={onDeleteItem}>메뉴 삭제</button
+          >
+        </div>
+      </div>
+    {/if}
   </div>
 </Modal>

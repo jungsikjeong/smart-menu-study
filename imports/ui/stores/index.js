@@ -1,3 +1,5 @@
+import { ADD_MODE, EDIT_MODE } from '../../utils/constants'
+
 const { writable } = require('svelte/store')
 
 function setModalActiveItem() {
@@ -62,9 +64,23 @@ function setItemPage() {
   }
 }
 
+function setItemFormMode() {
+  const { subscribe, set } = writable('')
+
+  const onAddMode = () => set(ADD_MODE)
+  const onEditMode = () => set(EDIT_MODE)
+
+  return {
+    subscribe,
+    onAddMode,
+    onEditMode,
+  }
+}
+
 export const modalActiveCategory = writable(false)
 export const modalActiveItem = setModalActiveItem()
 export const itemFormValue = setItemFormValue()
 export const itemPageLock = writable(false)
 export const itemPage = setItemPage()
 export const itemPageLoading = writable(false)
+export const itemFormMode = setItemFormMode()
