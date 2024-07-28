@@ -68,10 +68,10 @@
         // itemPageLoading.set(false)
       })
 
-    items.refetch({
-      itemCategoryId: $itemCategorySelected,
-      search: $itemSearch,
-    })
+    // items.refetch({
+    //   itemCategoryId: $itemCategorySelected,
+    //   search: $itemSearch,
+    // })
   }
 </script>
 

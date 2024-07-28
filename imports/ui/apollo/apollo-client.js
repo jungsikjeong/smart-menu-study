@@ -9,6 +9,9 @@ import {
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
+import { ALL } from '../../utils/constants'
+import { itemPage } from '../stores'
+import { get } from 'svelte/store'
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3000/graphql',
@@ -35,9 +38,53 @@ const link = split(
   //   uploadLink
 )
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        itemsPageCount: {
+          keyArgs: false,
+        },
+        items: {
+          keyArgs: ['_id'],
+          merge(existing = [], incoming = [], { args, readField }) {
+            const newArr = [...existing, ...incoming]
+            // 중복 제거
+            const uniqueArr = newArr.filter(
+              (arr, index, callback) =>
+                index === callback.findIndex((t) => t.__ref === arr.__ref),
+            )
+
+            // categoryId 필터링
+            let resultArr = []
+            // if (args.itemCategoryId !== ALL) {
+            //   resultArr = uniqueArr.filter(
+            //     (_id) =>
+            //       readField('itemCategoryId', _id) === args.itemCategoryId,
+            //   )
+            // } else {
+            //   resultArr = uniqueArr
+            // }
+
+            const itemPageNumber = get(itemPage)
+            if (itemPageNumber.pageNumber <= 1) {
+              resultArr = incoming
+            } else {
+              resultArr = newArr
+            }
+
+            return resultArr
+          },
+        },
+      },
+    },
+  },
+})
+
 const client = new ApolloClient({
   link: from([authLink, link]),
-  cache: new InMemoryCache(),
+
+  cache,
 })
 
 export default client
