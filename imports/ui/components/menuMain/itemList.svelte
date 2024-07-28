@@ -8,6 +8,8 @@
     modalActiveItem,
     itemPageLock,
     itemFormMode,
+    itemCategorySelected,
+    itemSearch,
   } from '../../stores'
 
   let component
@@ -56,8 +58,8 @@
       .fetchMore({
         variables: {
           pageNumber: $itemPage.pageNumber,
-          // itemCategoryId: $itemCategorySelected,
-          // search: $itemSearch,
+          itemCategoryId: $itemCategorySelected,
+          search: $itemSearch,
         },
       })
       .then((result) => {
@@ -65,6 +67,11 @@
         // itemMainLoading.set(false)
         // itemPageLoading.set(false)
       })
+
+    items.refetch({
+      itemCategoryId: $itemCategorySelected,
+      search: $itemSearch,
+    })
   }
 </script>
 
