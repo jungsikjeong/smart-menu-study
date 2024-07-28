@@ -29,7 +29,6 @@
   }
 </script>
 
-<!-- ? -->
 <Modal bind:modalActive={$modalActiveItem}>
   <h4 slot="modal-title">메뉴 추가</h4>
 

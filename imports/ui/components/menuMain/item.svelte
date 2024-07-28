@@ -1,7 +1,5 @@
 <script>
   export let item
-
-  console.log(item)
 </script>
 
 <div class="col mb-2">
