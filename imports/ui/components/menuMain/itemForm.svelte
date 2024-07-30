@@ -1,12 +1,18 @@
 <script>
   import Modal from '../common/modal.svelte'
-  import { itemFormValue, itemFormMode, modalActiveItem } from '../../stores'
+  import {
+    itemFormValue,
+    itemFormMode,
+    modalActiveItem,
+    itemCategorySelected,
+  } from '../../stores'
   import { mutation, query } from 'svelte-apollo'
   import {
     ADD_ITEM,
     DELETE_ITEM,
     GET_CATEGORIES,
     GET_ITEMS,
+    ITEM_FIELDS,
     UPDATE_ITEM,
   } from '../../apollo/query'
   import { ADD_MODE, EDIT_MODE } from '../../../utils/constants'
@@ -27,7 +33,34 @@
     try {
       await addItem({
         variables: $itemFormValue,
+        update: (cache, { data: { addItem } }) => {
+          // const existingItems = cache.readQuery({ query: GET_ITEMS })
+          // const newItem = addItem
+
+          // cache.writeQuery({
+          //   query: GET_ITEMS,
+          //   variables: { itemCategoryId: $itemCategorySelected },
+          //   data: {
+          //     itemPageCount: existingItems.itemPageCount,
+          //     items: [newItem, ...existingItems.items],
+          //   },
+          // })
+
+          cache.modify({
+            fields: {
+              items(existingItemsRefs = [], { readField }) {
+                const newItemRef = cache.writeFragment({
+                  data: addItem,
+                  fragment: ITEM_FIELDS,
+                })
+
+                return [newItemRef, ...existingItemsRefs]
+              },
+            },
+          })
+        },
       })
+
       clearItemForm()
     } catch (error) {
       console.log(`add item error: ${error.message}`)
@@ -38,14 +71,44 @@
     itemFormValue.resetForm()
     modalActiveItem.closeModal()
     // errors = {}
-    items.refetch()
+    // items.refetch()
   }
 
   const onUpdateItem = async () => {
     $itemFormValue.itemPrice = Number($itemFormValue.itemPrice)
 
     try {
-      await updateItem({ variables: $itemFormValue })
+      await updateItem({
+        variables: $itemFormValue,
+        update: (cache, { data: { updateItem } }) => {
+          // const existingItems = cache.readQuery({ query: GET_ITEMS })
+          // const newItems = existingItems.items.map((item) =>
+          //   item._id === updateItem._id ? (item = updateItem) : item,
+          // )
+
+          // cache.writeQuery({
+          //   query: GET_ITEMS,
+          //   variables: { itemCategoryId: $itemCategorySelected }, // 현재 캐시에 필터가있기때문에 꼭 넣어야한다고함
+          //   data: {
+          //     itemPageCount: existingItems.itemPageCount,
+          //     items: newItems,
+          //   },
+          // })
+
+          cache.modify({
+            fields: {
+              items(existingItemRefs, { readField }) {
+                cache.writeFragment({
+                  data: updateItem,
+                  fragment: ITEM_FIELDS,
+                })
+
+                return existingItemRefs
+              },
+            },
+          })
+        },
+      })
       clearItemForm()
     } catch (error) {
       console.log(`update item error ${error}`)
@@ -57,14 +120,38 @@
       try {
         await deleteItem({
           variables: { _id: $itemFormValue._id },
+          update: (cache, { data: { deleteItem } }) => {
+            cache.modify({
+              fields: {
+                items(existingItems, {}) {
+                  const newItems = existingItems.filter(
+                    (item) => item.__ref !== `Item:${deleteItem}`, // deleteItem은 삭제된 __ref 값이 들어옴 (_id값이들어옴)  _id값 앞에 Item(타입)을 붙여야 캐시의 고유값과 같은 형태가 됌
+                  )
+                  return newItems
+                },
+              },
+            })
+          },
         })
-
         clearItemForm()
       } catch (error) {
         console.log(`delete item error: ${error}`)
       }
     }
   }
+  // const onDeleteItem = async () => {
+  //   if (confirm('선택 메뉴를 삭제하겠습니까?')) {
+  //     try {
+  //       await deleteItem({
+  //         variables: { _id: $itemFormValue._id },
+  //       })
+
+  //       clearItemForm()
+  //     } catch (error) {
+  //       console.log(`delete item error: ${error}`)
+  //     }
+  //   }
+  // }
 </script>
 
 <Modal bind:modalActive={$modalActiveItem}>
