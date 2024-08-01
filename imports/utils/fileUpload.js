@@ -60,9 +60,9 @@ const processUpload = async (upload) => {
         console.log(`chunk: ${chunk.length}`)
         filesize += chunk.length
         if (filesize > maxFileSize) {
-          stream.destroy()
-          fs.remove(newFile)
-          reject('over file size')
+          stream.destroy() // 현재 진행중인 스트림 취소
+          fs.remove(newFile) // 현재까지 올라간 파일 지우기
+          reject('over file size') // 오류 메시지담아서 종료
         }
       })
       .pipe(createWriteStream(newFile))
