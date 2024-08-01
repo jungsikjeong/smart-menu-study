@@ -12,9 +12,16 @@ import { createClient } from 'graphql-ws'
 import { ALL } from '../../utils/constants'
 import { itemPage } from '../stores'
 import { get } from 'svelte/store'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 
-const httpLink = new HttpLink({
+// const httpLink = new HttpLink({
+//   uri: 'http://localhost:3000/graphql',
+// })
+
+const uploadLink = createUploadLink({
   uri: 'http://localhost:3000/graphql',
+  credentials: 'same-origin',
+  headers: { 'Apollo-Require-Preflight': 'true' },
 })
 
 const wsLink = new GraphQLWsLink(
@@ -34,8 +41,8 @@ const link = split(
     return kind === 'OperationDefinition' && operation === 'subscription'
   },
   wsLink,
-  httpLink,
-  //   uploadLink
+  // httpLink,
+  uploadLink,
 )
 
 const cache = new InMemoryCache({

@@ -14,6 +14,7 @@
     GET_ITEMS,
     ITEM_FIELDS,
     UPDATE_ITEM,
+    UPLOAD_FILE,
   } from '../../apollo/query'
   import { ADD_MODE, EDIT_MODE } from '../../../utils/constants'
 
@@ -26,6 +27,7 @@
   const addItem = mutation(ADD_ITEM)
   const updateItem = mutation(UPDATE_ITEM)
   const deleteItem = mutation(DELETE_ITEM)
+  const uploadFile = mutation(UPLOAD_FILE)
 
   const onAddItem = async () => {
     $itemFormValue.itemPrice = Number($itemFormValue.itemPrice)
@@ -152,6 +154,19 @@
   //     }
   //   }
   // }
+
+  const onUploadFile = async (e) => {
+    const { files } = e.target
+
+    try {
+      const upload = await uploadFile({ variables: { file: files[0] } })
+      $itemFormValue.itemImage =
+        upload.data.uploadFile.filePath + upload.data.uploadFile.fileName
+      return upload
+    } catch (error) {
+      console.log(`file upload error: ${error}`)
+    }
+  }
 </script>
 
 <Modal bind:modalActive={$modalActiveItem}>
@@ -197,7 +212,12 @@
     </div>
     <div class="mb-3">
       <label for="message-text" class="col-form-label">메뉴 이미지:</label>
-      <input type="file" class="form-control" id="recipient-name" />
+      <input
+        type="file"
+        class="form-control"
+        id="recipient-name"
+        on:change={onUploadFile}
+      />
     </div>
     <div class="mb-3">
       <img src="../images/food_img/KjdgrhOok.png" class="card-img-top" alt="" />
