@@ -162,6 +162,8 @@
       const upload = await uploadFile({ variables: { file: files[0] } })
       $itemFormValue.itemImage =
         upload.data.uploadFile.filePath + upload.data.uploadFile.fileName
+
+      console.log('upload::', upload)
       return upload
     } catch (error) {
       console.log(`file upload error: ${error}`)
@@ -218,6 +220,15 @@
         id="recipient-name"
         on:change={onUploadFile}
       />
+      {#if $itemFormValue.itemImage}
+        <div class="mb-3">
+          <img
+            src="http://localhost:3000/images{$itemFormValue.itemImage}"
+            class="card-img-top"
+            alt=""
+          />
+        </div>
+      {/if}
     </div>
     <div class="mb-3">
       <img src="../images/food_img/KjdgrhOok.png" class="card-img-top" alt="" />

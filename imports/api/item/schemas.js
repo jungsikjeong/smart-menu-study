@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-tag'
 
 const typeDefs = gql`
   scalar Date
@@ -53,6 +53,6 @@ const typeDefs = gql`
     items(pageNumber: Int, search: String, itemCategoryId: ID): [Item]
     itemPageCount(search: String, itemCategoryId: ID): Int
   }
-`;
+`
 
-export default typeDefs;
+export default typeDefs

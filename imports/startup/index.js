@@ -1,4 +1,4 @@
-import './apollo-server';
-import './fixtures';
-// import '../utils/readFile';
-import './accountConfig';
+import './apollo-server'
+import './fixtures'
+import '../utils/readFile'
+import './accountConfig'
