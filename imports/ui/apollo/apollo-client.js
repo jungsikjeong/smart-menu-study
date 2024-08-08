@@ -31,6 +31,17 @@ const wsLink = new GraphQLWsLink(
 )
 
 const authLink = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem('Meteor.loginToken')
+
+  // if (!token) authToken.checkToken()
+
+  operation.setContext(() => {
+    return {
+      headers: {
+        authorization: token ? token : '',
+      },
+    }
+  })
   return forward(operation)
 })
 
