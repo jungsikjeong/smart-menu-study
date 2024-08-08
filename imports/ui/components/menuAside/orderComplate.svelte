@@ -3,6 +3,7 @@
   import { modalActiveComplateOrder, orders } from '../../stores'
   import Modal from '../common/modal.svelte'
   import { ADD_ORDER } from '../../apollo/query'
+  import { orderValidateSchema } from '../../../utils/validates'
 
   const addOrder = mutation(ADD_ORDER)
 

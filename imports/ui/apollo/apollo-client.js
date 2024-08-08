@@ -24,6 +24,7 @@ const uploadLink = createUploadLink({
   headers: { 'Apollo-Require-Preflight': 'true' },
 })
 
+// subscription을 사용하기위해서는 이걸 설정해줘야됌
 const wsLink = new GraphQLWsLink(
   createClient({
     url: 'ws://localhost:3000/graphql',
