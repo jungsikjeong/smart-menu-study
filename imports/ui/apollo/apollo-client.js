@@ -13,6 +13,7 @@ import { ALL } from '../../utils/constants'
 import { authToken, itemPage } from '../stores'
 import { get } from 'svelte/store'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
+import Shortid from 'shortid'
 
 // const httpLink = new HttpLink({
 //   uri: 'http://localhost:3000/graphql',
@@ -97,6 +98,18 @@ const cache = new InMemoryCache({
         },
       },
     },
+  },
+
+  dataIdFromObject(responseObject) {
+    switch (responseObject.__typename) {
+      // 보통 cache id의 경우 콜렉션명인 __typename + _id로 만들어 짐.
+      // 문제는 하위배열인 item의 경우 중복 발생이 일어날 수 있어서 _id를 cache id로사용하면 안됨.
+      // 이럴때 커스텀 key를 다음과 같이 만들어주면 됨.
+      case 'OrderItem':
+        return `OrderItem:${Shortid.generate()}`
+      default:
+        return defaultDataIdFromObject(responseObject)
+    }
   },
 })
 
