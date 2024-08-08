@@ -10,7 +10,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
 import { ALL } from '../../utils/constants'
-import { itemPage } from '../stores'
+import { authToken, itemPage } from '../stores'
 import { get } from 'svelte/store'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 
@@ -33,7 +33,7 @@ const wsLink = new GraphQLWsLink(
 const authLink = new ApolloLink((operation, forward) => {
   const token = localStorage.getItem('Meteor.loginToken')
 
-  // if (!token) authToken.checkToken()
+  if (!token) authToken.checkToken()
 
   operation.setContext(() => {
     return {

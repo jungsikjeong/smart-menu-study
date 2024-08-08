@@ -3,7 +3,7 @@
   import { mutation } from 'svelte-apollo'
   import { LOGIN_WITH_PASSWORD } from '/imports/ui/apollo/query'
   import { extractErrors, loginValidateSchema } from '../../../utils/validates'
-  import { authToken } from '/imports/ui/stores'
+  import { authToken } from '../../stores/index'
 
   const loginWithPassword = mutation(LOGIN_WITH_PASSWORD)
 
