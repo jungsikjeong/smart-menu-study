@@ -171,8 +171,94 @@ function setIsAdmin() {
   const checkRole = derived(auth, ($auth) =>
     $auth.role === ADMIN ? true : false,
   )
-  console.log('auth:', auth)
+
   return checkRole
+}
+
+function setOrders() {
+  const initValues = {
+    orderPriceSum: 0,
+    orderCount: 0,
+    orderItems: [],
+  }
+
+  const { subscribe, update, set } = writable({ ...initValues })
+
+  const resetOrder = () => set({ ...initValues })
+
+  const incrementOrder = (getOrder) => {
+    update((datas) => {
+      let orderPriceSum = datas.orderPriceSum
+      let orderCount = datas.orderCount
+      let orderItems = datas.orderItems
+
+      const duplicateCheckOrderItem = orderItems.find(
+        (item) => item._id === getOrder._id,
+      )
+
+      if (duplicateCheckOrderItem) {
+        orderItems = orderItems.map((item) => {
+          if (item._id === getOrder._id) {
+            item.itemPriceSum = item.itemPriceSum + getOrder.itemPrice
+            item.itemCount = item.itemCount + 1
+          }
+          return item
+        })
+      } else {
+        const newOrder = {
+          _id: getOrder._id,
+          itemName: getOrder.itemName,
+          itemPrice: getOrder.itemPrice,
+          itemPriceSum: getOrder.itemPrice,
+          itemCount: 1,
+        }
+        orderItems = [...orderItems, newOrder]
+      }
+
+      orderPriceSum = orderPriceSum + getOrder.itemPrice
+      orderCount = orderCount + 1
+
+      datas.orderPriceSum = orderPriceSum
+      datas.orderCount = orderCount
+      datas.orderItems = orderItems
+
+      return datas
+    })
+  }
+
+  const decrementOrder = (getOrder) => {
+    update((datas) => {
+      let orderPriceSum = datas.orderPriceSum
+      let orderCount = datas.orderCount
+      let orderItems = datas.orderItems
+
+      orderItems = orderItems
+        .map((item) => {
+          if (item._id === getOrder._id) {
+            item.itemPriceSum = item.itemPriceSum - getOrder.itemPrice
+            item.itemCount = item.itemCount - 1
+          }
+          return item
+        })
+        .filter((item) => item.itemCount !== 0)
+
+      orderPriceSum = orderPriceSum - getOrder.itemPrice
+      orderCount = orderCount - 1
+
+      datas.orderPriceSum = orderPriceSum
+      datas.orderCount = orderCount
+      datas.orderItems = orderItems
+
+      return datas
+    })
+  }
+
+  return {
+    subscribe,
+    resetOrder,
+    incrementOrder,
+    decrementOrder,
+  }
 }
 
 export const modalActiveCategory = writable(false)
@@ -187,3 +273,5 @@ export const itemSearch = writable('')
 export const authToken = setAuthToken()
 export const auth = setAuth()
 export const isAdmin = setIsAdmin()
+export const orders = setOrders()
+export const modalActiveComplateOrder = writable(false)

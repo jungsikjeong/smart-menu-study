@@ -4,6 +4,7 @@
     itemFormMode,
     itemFormValue,
     modalActiveItem,
+    orders,
   } from '../../stores'
   export let item
 
@@ -21,10 +22,9 @@
   const onClickMenu = () => {
     if ($isAdmin) {
       openEditModeActiveItem()
+    } else {
+      orders.incrementOrder(item)
     }
-    // else {
-    //   orders.incrementOrder(item)
-    // }
   }
 </script>
 
