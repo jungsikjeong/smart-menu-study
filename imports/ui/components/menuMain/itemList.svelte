@@ -10,6 +10,7 @@
     itemFormMode,
     itemCategorySelected,
     itemSearch,
+    isAdmin,
   } from '../../stores'
 
   let component
@@ -82,15 +83,17 @@
   {#if $items.loading}
     <ItemLoading />
   {:else}
-    <div class="col mb-2">
-      <span class="btn-add-modal-show" on:click={onOpenModalItemForm}>
-        <div
-          class="card menu-add-box h-100 d-flex justify-content-center align-items-center"
-        >
-          <i class="bx bx-plus bx-md"></i>
-        </div>
-      </span>
-    </div>
+    {#if $isAdmin}
+      <div class="col mb-2">
+        <span class="btn-add-modal-show" on:click={onOpenModalItemForm}>
+          <div
+            class="card menu-add-box h-100 d-flex justify-content-center align-items-center"
+          >
+            <i class="bx bx-plus bx-md"></i>
+          </div>
+        </span>
+      </div>
+    {/if}
 
     {#each $items.data.items as item (item._id)}
       <Item {item} />

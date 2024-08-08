@@ -1,5 +1,10 @@
 <script>
-  import { itemFormMode, itemFormValue, modalActiveItem } from '../../stores'
+  import {
+    isAdmin,
+    itemFormMode,
+    itemFormValue,
+    modalActiveItem,
+  } from '../../stores'
   export let item
 
   const openEditModeActiveItem = () => {
@@ -12,10 +17,19 @@
     itemFormMode.onEditMode()
     modalActiveItem.openModal()
   }
+
+  const onClickMenu = () => {
+    if ($isAdmin) {
+      openEditModeActiveItem()
+    }
+    // else {
+    //   orders.incrementOrder(item)
+    // }
+  }
 </script>
 
 <div class="col mb-2">
-  <div class="card ct-shadow-sm menu-item-box">
+  <div class="card ct-shadow-sm menu-item-box" on:click={onClickMenu}>
     <div
       class="img-box"
       style="background-image: url(http://localhost:3000/images{item.itemImage});"

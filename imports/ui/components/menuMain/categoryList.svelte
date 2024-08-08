@@ -2,7 +2,11 @@
   import { query } from 'svelte-apollo'
   import { GET_CATEGORIES } from '../../apollo/query'
   import CategoryForm from './categoryForm.svelte'
-  import { itemCategorySelected, modalActiveCategory } from '../../stores'
+  import {
+    isAdmin,
+    itemCategorySelected,
+    modalActiveCategory,
+  } from '../../stores'
   import { ALL } from '../../../utils/constants'
 
   const categories = query(GET_CATEGORIES)
@@ -59,12 +63,14 @@
       {/each}
     {/if}
 
-    <li>
-      <a
-        href="#null"
-        class="d-flex align-items-center add"
-        on:click={onOpenModalActiveCategory}>+관리</a
-      >
-    </li>
+    {#if $isAdmin}
+      <li>
+        <a
+          href="#null"
+          class="d-flex align-items-center add"
+          on:click={onOpenModalActiveCategory}>+관리</a
+        >
+      </li>
+    {/if}
   </ul>
 </div>

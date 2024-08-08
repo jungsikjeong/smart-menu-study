@@ -171,6 +171,7 @@ function setIsAdmin() {
   const checkRole = derived(auth, ($auth) =>
     $auth.role === ADMIN ? true : false,
   )
+  console.log('auth:', auth)
   return checkRole
 }
 

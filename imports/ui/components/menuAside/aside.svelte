@@ -35,7 +35,7 @@
           <a href="#null" on:click={onLogout}><i class="bx bx-log-out"></i></a>
           <a href="/users"><i class="bx bxs-cog"></i></a>
         {:else}
-          <a href="#null" on:click={goLogin}><i class="bx bx-log-in"></i></a>
+          <a href="/login" on:click={goLogin}><i class="bx bx-log-in"></i></a>
         {/if}
       </span>
     </div>
