@@ -1,7 +1,7 @@
 <script>
   import { query, mutation } from 'svelte-apollo'
   import { GET_ORDERS, SUBSCRIBE_ORDER, CHECK_ORDER } from '../../apollo/query'
-  // import notyf from '/imports/utils/notyfConfig'
+  import notyf from '../../../utils/notyConfig'
   import { fade } from 'svelte/transition'
   import { authToken } from '../../stores'
 
@@ -22,8 +22,8 @@
       if (!subscriptionData.data) return prev
       const newOrder = subscriptionData.data.orderAdded
 
-      alert(`주문이 추가 되었습니다. ${newOrder.orderDate}`)
-      // notyf.success(`주문이 추가 되었습니다. </br> ${newOrder.orderDate}`)
+      // alert(`주문이 추가 되었습니다. ${newOrder.orderDate}`)
+      notyf.success(`주문이 추가 되었습니다. </br> ${newOrder.orderDate}`)
 
       return {
         orders: [...prev.orders, newOrder],

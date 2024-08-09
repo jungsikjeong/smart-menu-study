@@ -9,7 +9,7 @@ import { WebSocketServer } from 'ws'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { getUser } from 'meteor/apollo'
 import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs'
-// import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
+import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 
 import resolverItem from '../api/item/resolvers'
 import typeDefsItem from '../api/item/schemas'
@@ -54,6 +54,7 @@ import typeDefsAuth from '../api/auth/schemas'
   const server = new ApolloServer({
     schema,
     plugins: [
+      ApolloServerPluginLandingPageDisabled(), // 샌드박스 비활성화
       {
         async serverWillStart() {
           return {

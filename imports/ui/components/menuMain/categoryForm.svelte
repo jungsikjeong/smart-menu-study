@@ -8,6 +8,7 @@
     UPDATE_CATEGORY,
   } from '../../apollo/query'
   import { query, mutation } from 'svelte-apollo'
+  import notyf from '../../../utils/notyConfig'
 
   const categories = query(GET_CATEGORIES)
   const addCategory = mutation(ADD_CATEGORY)
